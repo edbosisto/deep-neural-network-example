@@ -1,7 +1,22 @@
-# Deep neural network - an example built during deeplearning.ai course on Coursera
-# Multi - layered network for machine learning
+# Deep neural network: an example built as part of the deeplearning.ai course on Coursera
+# Multi layered network for machine learning
 
 import numpy as np
+
+
+# equations for computation
+def sigmoid(x):
+    z = np.exp(-x)
+    sig = 1 / (1 + z)
+    return sig
+
+
+def relu(x):
+    return max(0.0, x)
+
+
+# sigmoid_backward =
+# relu_backward =
 
 
 # Function to initialize parameters (weights and bias)
@@ -83,5 +98,34 @@ def linear_forward(A, W, b):
     return Z, cache
 
 
-#
+# Linear activation (forward)
+def linear_activation_forward(A_prev, W, b, activation):
+    """
+    Implement the forward propagation for the LINEAR->ACTIVATION layer
+
+    Arguments:
+    A_prev -- activations from previous layer (or input data): (size of previous layer, number of examples)
+    W -- weights matrix: numpy array of shape (size of current layer, size of previous layer)
+    b -- bias vector, numpy array of shape (size of the current layer, 1)
+    activation -- the activation to be used in this layer, stored as a text string: "sigmoid" or "relu"
+
+    Returns:
+    A -- the output of the activation function, also called the post-activation value
+    cache -- a python tuple containing "linear_cache" and "activation_cache";
+             stored for computing the backward pass efficiently
+    """
+
+    if activation == "sigmoid":
+        Z, linear_cache = linear_forward(A_prev, W, b)
+        A, activation_cache = sigmoid(Z)
+
+    elif activation == "relu":
+        Z, linear_cache = linear_forward(A_prev, W, b)
+        A, activation_cache = relu(Z)
+
+    cache = (linear_cache, activation_cache)
+
+    return A, cache
+
+
 
