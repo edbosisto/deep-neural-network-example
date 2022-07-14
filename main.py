@@ -117,11 +117,11 @@ def linear_activation_forward(A_prev, W, b, activation):
 
     if activation == "sigmoid":
         Z, linear_cache = linear_forward(A_prev, W, b)
-        A, activation_cache = sigmoid(Z)
+        A, activation_cache = sigmoid(Z)  # sigmoid function is defined at top of page
 
     elif activation == "relu":
         Z, linear_cache = linear_forward(A_prev, W, b)
-        A, activation_cache = relu(Z)
+        A, activation_cache = relu(Z)  # relu function is defined at top of page
 
     cache = (linear_cache, activation_cache)
 
