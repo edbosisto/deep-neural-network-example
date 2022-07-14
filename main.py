@@ -158,4 +158,26 @@ def L_model_forward(X, parameters):
     return AL, caches
 
 
+# Compute the cross-entropy cost
+def compute_cost(AL, Y):
+    """
+    Implement the cost function.
 
+    Arguments:
+    AL -- probability vector corresponding to your label predictions, shape (1, number of examples)
+    Y -- true "label" vector (for example: containing 0 if non-cat, 1 if cat), shape (1, number of examples)
+
+    Returns:
+    cost -- cross-entropy cost
+    """
+
+    m = Y.shape[1]
+    # Use transpose to ensure matrix dims are correct
+    cost = - sum(np.dot(Y, np.log(AL).T) + np.dot((1 - Y), np.log(1 - AL).T)) / m
+
+    cost = np.squeeze(cost)  # To make sure your cost's shape is what we expect (e.g. this turns [[17]] into 17).
+
+    return cost
+
+
+#
