@@ -15,8 +15,17 @@ def relu(x):
     return max(0.0, x)
 
 
-# sigmoid_backward =
-# relu_backward =
+def sigmoid_backward(y, x):
+    z = np.exp(-x)
+    sig = 1 / (1 + z)
+    sig_back = y * sig
+    return sig_back
+
+
+def relu_backward(y, x):
+    relu = max(0.0, x)
+    relu_back = y * relu
+    return relu_back
 
 
 # Function to initialize parameters (weights and bias)
