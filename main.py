@@ -317,6 +317,13 @@ def update_parameters(params, grads, learning_rate):
 # TWO LAYER MODEL #
 ###################
 
+# CONSTANTS DEFINING THE MODEL
+n_x = 12288     # num_px * num_px * 3 for a given example
+n_h = 7
+n_y = 1
+layers_dims = (n_x, n_h, n_y)
+learning_rate = 0.0075
+
 
 def two_layer_model(X, Y, layers_dims, learning_rate=0.0075, num_iterations=3000, print_cost=False):
     """
@@ -397,3 +404,5 @@ def plot_costs(costs, learning_rate=0.0075):
     plt.xlabel('iterations (per hundreds)')
     plt.title("Learning rate =" + str(learning_rate))
     plt.show()
+
+
