@@ -1,5 +1,7 @@
-# Deep neural network: an example built as part of the deeplearning.ai course on Coursera
-# Multi layered network for machine learning
+"""
+Deep neural network: an example built as part of the deeplearning.ai course on Coursera
+Networks for machine learning
+"""
 
 import numpy as np
 import matplotlib as plt
