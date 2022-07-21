@@ -1,6 +1,9 @@
 """
-Functions for optimization of multilayered neural networks
+Functions for optimization of multilayered neural networks.
+Includes functions for Gradient Descent, Mini batch descent, Momentum, Adam
 """
+
+import numpy as np
 
 
 ####################
@@ -158,6 +161,47 @@ def update_parameters_with_momentum(parameters, grads, v, beta, learning_rate):
         parameters["b" + str(l)] = parameters["b" + str(l)] - learning_rate * v["db" + str(l)]
 
     return parameters, v
+
+
+########
+# ADAM #
+########
+
+# initialize parameters when using Adam
+
+def initialize_adam(parameters):
+    """
+    Initializes v and s as two python dictionaries with:
+                - keys: "dW1", "db1", ..., "dWL", "dbL"
+                - values: numpy arrays of zeros of the same shape as the corresponding gradients/parameters.
+
+    Arguments:
+    parameters -- python dictionary containing your parameters.
+                    parameters["W" + str(l)] = Wl
+                    parameters["b" + str(l)] = bl
+
+    Returns:
+    v -- python dictionary that will contain the exponentially weighted average of the gradient. Initialized with zeros.
+                    v["dW" + str(l)] = ...
+                    v["db" + str(l)] = ...
+    s -- python dictionary that will contain the exponentially weighted average of the squared gradient. Initialized with zeros.
+                    s["dW" + str(l)] = ...
+                    s["db" + str(l)] = ...
+
+    """
+
+    L = len(parameters) // 2  # number of layers in the neural networks
+    v = {}
+    s = {}
+
+    # Initialize v, s. Input: "parameters". Outputs: "v, s".
+    for l in range(1, L + 1):
+        v["dW" + str(l)] = np.zeros((parameters["W" + str(l)].shape[0], parameters["W" + str(l)].shape[1]))
+        v["db" + str(l)] = np.zeros((parameters["b" + str(l)].shape[0], parameters["b" + str(l)].shape[1]))
+        s["dW" + str(l)] = np.zeros((parameters["W" + str(l)].shape[0], parameters["W" + str(l)].shape[1]))
+        s["db" + str(l)] = np.zeros((parameters["b" + str(l)].shape[0], parameters["b" + str(l)].shape[1]))
+
+    return v, s
 
 
 
